@@ -1,0 +1,443 @@
+using System;
+
+namespace TriangleBattleship
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            /// Dentified The Booleans, Strings, Integers and Doubles which are necessary for the whole program.
+            bool TryParseSuccess = false;
+            bool coordinates = false;
+            bool menubiregidildi = false;
+            bool menuucegidildi = false;
+            bool itsatriangle = false;
+            bool bullethit = false;
+            Random rd = new Random();
+            String gotomainmenu;
+            String Nickname = "0";
+            String AxS = "0";
+            String AyS = "0";
+            String BxS = "0";
+            String ByS = "0";
+            String CxS = "0";
+            String CyS = "0";
+            String mainmenu0 = "Please Chose One";
+            String mainmenu1 = "1-Enter Ship & Player Info";
+            String mainmenu2 = "2-Ship Info";
+            String mainmenu3 = "3-Shoot at the Ship";
+            String mainmenu4 = "4-High Scores";
+            String mainmenu5 = "5-Exit";
+            String entry;
+            int AxI = 0;
+            int AyI = 0;
+            int BxI = 0;
+            int ByI = 0;
+            int CxI = 0;
+            int CyI = 0;
+            int BulletX = 0;
+            int BulletY = 0;
+            int entryI = 0;
+            int nazan = 60;
+            int ali = 30;
+            int sibel = 10;
+            double A = 0;
+            double B = 0;
+            double C = 0;
+            double Area = 0;
+            double AB = 0;
+            double AC = 0;
+            double BC = 0;
+
+            /// The Menu loop
+            ///There is no fifth tab because its an exit tab. If you input 5 to console, the first while loop ends and program shuts down.
+            while (entryI != 5)
+            {
+
+                Console.Clear();
+                Console.WriteLine(mainmenu0);
+                Console.WriteLine("-------------------------------------------");
+                Console.WriteLine(mainmenu1);
+                Console.WriteLine(mainmenu2);
+                Console.WriteLine(mainmenu3);
+                Console.WriteLine(mainmenu4);
+                Console.WriteLine(mainmenu5);
+                entry = Console.ReadLine();
+                Console.Clear();
+                TryParseSuccess = Int32.TryParse(entry, out entryI);
+
+                /// Wrong Entry loop
+                while (TryParseSuccess == false | entryI > 5 | 1 > entryI)
+                {
+                    Console.Clear();
+                    Console.WriteLine("Your entry is not valid. Please select a valid tab.");
+                    Console.WriteLine("-------------------------------------------");
+                    Console.WriteLine(mainmenu1);
+                    Console.WriteLine(mainmenu2);
+                    Console.WriteLine(mainmenu3);
+                    Console.WriteLine(mainmenu4);
+                    Console.WriteLine(mainmenu5);
+                    entry = Console.ReadLine();
+                    TryParseSuccess = Int32.TryParse(entry, out entryI);
+                    Console.Clear();
+                }
+
+                /// First Tab which gets the inputs from user
+                if (entryI == 1)
+                {
+                    itsatriangle = false;
+                    while (itsatriangle == false)
+                    {
+                        menuucegidildi = false;
+                        menubiregidildi = true;
+                        Console.Clear();
+                        Console.WriteLine("Enter Your Nickname");
+                        Nickname = Console.ReadLine();
+                        Console.Clear();
+
+                        Console.WriteLine("Enter Your Ax Coordinate");
+                        AxS = Console.ReadLine();
+                        TryParseSuccess = Int32.TryParse(AxS, out AxI);
+                        coordinates = AxI > 0 && 31 > AxI;
+                        while (TryParseSuccess == false | coordinates == false)
+                        {
+                            Console.Clear();
+                            Console.WriteLine("Your Ax Coordinate cant be under 1, over 30 or a non-Integer value. Please enter a valid value.");
+                            AxS = Console.ReadLine();
+                            TryParseSuccess = Int32.TryParse(AxS, out AxI);
+                            coordinates = AxI > 0 && 31 > AxI;
+                        }
+                        Console.Clear();
+                        Console.WriteLine("Enter Your Ay Coordinate                              Ax=" + AxI);
+
+                        AyS = Console.ReadLine();
+                        TryParseSuccess = Int32.TryParse(AyS, out AyI);
+                        coordinates = AyI > 0 && 13 > AyI;
+
+                        while (TryParseSuccess == false | coordinates == false)
+                        {
+                            Console.Clear();
+                            Console.WriteLine("Your Ay Coordinate cant be under 1, over 12 or a non-Integer value. Please enter a valid value.");
+                            AyS = Console.ReadLine();
+                            TryParseSuccess = Int32.TryParse(AyS, out AyI);
+                            coordinates = AyI > 0 && 13 > AyI;
+                        }
+                        Console.Clear();
+                        Console.WriteLine("Enter Your Bx Coordinate                               Ax=" + AxI);
+                        Console.WriteLine("                                                       Ay=" + AyI);
+                        BxS = Console.ReadLine();
+                        TryParseSuccess = Int32.TryParse(BxS, out BxI);
+                        coordinates = BxI > 0 && 31 > BxI;
+
+                        while (TryParseSuccess == false | coordinates == false)
+                        {
+                            Console.Clear();
+                            Console.WriteLine("Your Bx Coordinate cant be under 1, over 30 or a non-Integer value. Please enter a valid value.");
+                            BxS = Console.ReadLine();
+                            TryParseSuccess = Int32.TryParse(BxS, out BxI);
+                            coordinates = BxI > 0 && 31 > BxI;
+                        }
+
+                        Console.Clear();
+                        Console.WriteLine("Enter Your By Coordinate                               Ax=" + AxI);
+                        Console.WriteLine("                                                       Ay=" + AyI);
+                        Console.WriteLine("                                                       Bx=" + BxI);
+                        ByS = Console.ReadLine();
+                        TryParseSuccess = Int32.TryParse(ByS, out ByI);
+                        coordinates = ByI > 0 && 13 > ByI;
+
+                        while (TryParseSuccess == false | coordinates == false)
+                        {
+                            Console.Clear();
+                            Console.WriteLine("Your By Coordinate cant be under 1, over 12 or a non-Integer value. Please enter a valid value.");
+                            ByS = Console.ReadLine();
+                            TryParseSuccess = Int32.TryParse(ByS, out ByI);
+                            coordinates = ByI > 0 && 13 > ByI;
+                        }
+
+                        Console.Clear();
+                        Console.WriteLine("Enter Your Cx Coordinate                               Ax=" + AxI);
+                        Console.WriteLine("                                                       Ay=" + AyI);
+                        Console.WriteLine("                                                       Bx=" + BxI);
+                        Console.WriteLine("                                                       By=" + ByI);
+                        CxS = Console.ReadLine();
+                        TryParseSuccess = Int32.TryParse(CxS, out CxI);
+                        coordinates = CxI > 0 && 31 > CxI;
+
+                        while (TryParseSuccess == false | coordinates == false)
+                        {
+                            Console.Clear();
+                            Console.WriteLine("Your Cx Coordinate cant be under 1, over 30 or a non-Integer value. Please enter a valid value.");
+                            CxS = Console.ReadLine();
+                            TryParseSuccess = Int32.TryParse(CxS, out CxI);
+                            coordinates = CxI > 0 && 31 > CxI;
+                        }
+
+                        Console.Clear();
+                        Console.WriteLine("Enter Your Cy Coordinate                               Ax=" + AxI);
+                        Console.WriteLine("                                                       Ay=" + AyI);
+                        Console.WriteLine("                                                       Bx=" + BxI);
+                        Console.WriteLine("                                                       By=" + ByI);
+                        Console.WriteLine("                                                       Cx=" + CxI);
+                        CyS = Console.ReadLine();
+                        TryParseSuccess = Int32.TryParse(CyS, out CyI);
+                        coordinates = CyI > 0 && 13 > CyI;
+
+                        while (TryParseSuccess == false | coordinates == false)
+                        {
+                            Console.Clear();
+                            Console.WriteLine("Your Cy Coordinate cant be under 1, over 12 or a non-Integer value. Please enter a valid value.");
+                            CyS = Console.ReadLine();
+                            TryParseSuccess = Int32.TryParse(CyS, out CyI);
+                            coordinates = CyI > 0 && 13 > CyI;
+                        }
+                        Console.Clear();
+                        Console.WriteLine("A=(" + AxI + "," + AyI + ")  " + "B=(" + BxI + "," + ByI + ")  " + "C=(" + CxI + "," + CyI + ")");
+                        Console.WriteLine("------------------------------------------------------------------------------");
+                        Console.WriteLine("Press Enter for Mainmenu");
+                        gotomainmenu = Console.ReadLine();
+
+                        AB = Math.Sqrt(((AxI - BxI) * (AxI - BxI)) + ((AyI - ByI) * (AyI - ByI)));
+                        BC = Math.Sqrt(((BxI - CxI) * (BxI - CxI)) + ((ByI - CyI) * (ByI - CyI)));
+                        AC = Math.Sqrt(((AxI - CxI) * (AxI - CxI)) + ((AyI - CyI) * (AyI - CyI)));
+                        Area = Math.Round((Math.Abs(((Math.Abs(AxI * ByI) + Math.Abs(BxI * CyI) + Math.Abs(CxI * AyI)) - (Math.Abs(BxI * AyI) + Math.Abs(CxI * ByI) + Math.Abs(AxI * CyI)))) * 0.5), 2);
+
+                        ///Is it triangle or not
+                        if (AB + BC != AC && AB + AC != BC && AC + BC != AB)
+                        {
+                            itsatriangle = true;
+                        }
+                        else
+                        {
+                            Console.Clear();
+                            Console.WriteLine("Your coordinates don't generate a triangle. Please enter new coordinates");
+                            Console.WriteLine("------------------------------------------------------------------------------");
+                            Console.WriteLine("Press Enter for Try Again");
+                            gotomainmenu = Console.ReadLine();
+                        }
+                    }
+                }
+                /// Second Tab which Outputs of the mathematical calculations are given to user
+                if (entryI == 2 && menubiregidildi == false)
+                {
+                    Console.WriteLine("You Haven't Generated a Ship Yet");
+                    Console.WriteLine("------------------------------------------------------------------------------");
+                    Console.WriteLine("Press Enter for Mainmenu");
+                    gotomainmenu = Console.ReadLine();
+                }
+
+
+                if (entryI == 2 && menubiregidildi == true)
+                {
+                    ///median calculations
+                    double MedianABx = (AxI + BxI) * 0.5;
+                    double MedianABy = (AyI + ByI) * 0.5;
+                    double MedianACx = (AxI + CxI) * 0.5;
+                    double MedianACy = (AyI + CyI) * 0.5;
+                    double MedianBCx = (BxI + CxI) * 0.5;
+                    double MedianBCy = (ByI + CyI) * 0.5;
+
+                    ///centroids
+                    double Centroidx = Math.Round(((AxI + BxI + CxI) * (0.2 / 0.6)), 2);
+                    double Centroidy = Math.Round(((AyI + ByI + CyI) * (0.2 / 0.6)), 2);
+
+                    ///the cosinus theorem to calculate the angles of the triangle
+                    double CosA = ((AC * AC) + (AB * AB) - (BC * BC)) / (AC * AB) * 0.5;
+                    A = Math.Acos(CosA) * 180 / Math.PI;
+                    double CosB = ((BC * BC) + (AB * AB) - (AC * AC)) / (BC * AB) * 0.5;
+                    B = Math.Acos(CosB) * 180 / Math.PI;
+                    double CosC = ((AC * AC) + (BC * BC) - (AB * AB)) / (AC * BC) * 0.5;
+                    C = Math.Acos(CosC) * 180 / Math.PI;
+
+                    /// the bisector of angle A
+                    double BN = BC / (AB + AC) * AB;
+                    double CN = BC - BN;
+                    double AN = Math.Round(Math.Sqrt(AB * AC - (BN * CN)), 2);
+
+                    ///perimeter calculation
+                    double Perimeter = AB + BC + AC;
+
+                    /// circumscribed and inscribed areas
+                    double circumscribedArea = Math.Round(Math.Pow((AB * BC * AC * 0.5 * 0.5 / Area), 2) * Math.PI, 2);
+                    double inscribedArea = Math.Round(Math.Pow(2 * Area / Perimeter, 2) * Math.PI, 2);
+
+                    ///its complicated to describe here but I think I coded them nicely and you can see yourself
+                    String Gui = "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒";
+                    Console.WriteLine("------------------------------------------------------------------------------");
+		    Console.WriteLine("  ╔══════════════════════════════╗");
+                    Console.WriteLine("12║" + Gui + "║");
+                    Console.WriteLine("11║" + Gui + "║");
+                    Console.WriteLine("10║" + Gui + "║");
+                    Console.WriteLine("09║" + Gui + "║");
+                    Console.WriteLine("08║" + Gui + "║");
+                    Console.WriteLine("07║" + Gui + "║");
+                    Console.WriteLine("06║" + Gui + "║");
+                    Console.WriteLine("05║" + Gui + "║");
+                    Console.WriteLine("04║" + Gui + "║");
+                    Console.WriteLine("03║" + Gui + "║");
+                    Console.WriteLine("02║" + Gui + "║");
+                    Console.WriteLine("01║" + Gui + "║");
+                    Console.WriteLine("00╚══════════════════════════════╝");
+                    Console.WriteLine("  0123456789012345678901234567890");
+                    Console.WriteLine("------------------------------------------------------------------------------");
+                    Console.SetCursorPosition(2 + AxI, 13 - AyI);
+                    Console.Write("A");
+                    Console.SetCursorPosition(2 + BxI, 13 - ByI);
+                    Console.Write("B");
+                    Console.SetCursorPosition(2 + CxI, 13 - CyI);
+                    Console.Write("C");
+                    Console.SetCursorPosition(0, 16);
+                    Console.WriteLine("Your Ships Coordinates Are: A(" + AxS + "," + AyS + ") B(" + BxS + "," + ByS + ") C(" + CxS + "," + CyS + ")");
+                    Console.WriteLine("Your Ships Area Is: " + Math.Round(Area, 2));
+                    Console.WriteLine("Your Ships Perimeter Is: " + Math.Round(Perimeter, 2));
+                    Console.WriteLine("|AB| = " + Math.Round(AB, 2));
+                    Console.WriteLine("|AC| = " + Math.Round(AC, 2));
+                    Console.WriteLine("|BC| = " + Math.Round(BC, 2));
+                    Console.WriteLine("Median |AB| = (" + MedianABx + " , " + MedianABy + ")");
+                    Console.WriteLine("Median |AC| = (" + MedianACx + " , " + MedianACy + ")");
+                    Console.WriteLine("Median |BC| = (" + MedianBCx + " , " + MedianBCy + ")");
+                    Console.WriteLine("Centroid    = (" + Centroidx + " , " + Centroidy + ")");
+                    Console.WriteLine("Angle A = " + Math.Round(A, 2));
+                    Console.WriteLine("Angle B = " + Math.Round(B, 2));
+                    Console.WriteLine("Angle C = " + Math.Round(C, 2));
+                    Console.WriteLine("Length of Bisector A = " + AN);
+                    Console.WriteLine("Inscribed Circle's Area = " + inscribedArea);
+                    Console.WriteLine("Circumscribed Circle's Area = " + circumscribedArea);
+                    if (AB == AC | AB == BC | BC == AC && (AB != AC | AB != BC | AC != BC))
+                    {
+                        Console.WriteLine("This Triangle is an Isosceles");
+                    }
+                    if (AB != AC && AB != BC && BC != AC)
+                    {
+                        Console.WriteLine("This Triangle is a Scalene");
+                    }
+                    if (AB == AC && AC == BC)
+                    {
+                        Console.WriteLine("This Triangle is an Equilateral");
+                    }
+                    if (A < 90 && B < 90 && C < 90)
+                    {
+                        Console.WriteLine("This Triangle is an Acute-angle");
+                    }
+                    if (A > 90 | B > 90 | C > 90)
+                    {
+                        Console.WriteLine("This Triangle is an Obtuse-angle");
+                    }
+                    if (A == 90 | B == 90 | C == 90)
+                    {
+                        Console.WriteLine("This Triangle is a Right-angle");
+                    }
+
+                    Console.WriteLine("------------------------------------------------------------------------------");
+                    Console.WriteLine("Press Enter for Mainmenu");
+                    gotomainmenu = Console.ReadLine();
+                }
+                /// Third Tab which bullet is randomized and shooted, game user interface is printed and calculate if bullet is in the triangle or not
+                if (entryI == 3 && menubiregidildi == true)
+                {
+                    BulletX = rd.Next(1, 30);
+                    BulletY = rd.Next(1, 12);
+                    double bx = BxI - AxI;
+                    double by = ByI - AyI;
+                    double cx = CxI - AxI;
+                    double cy = CyI - AyI;
+                    double m = BulletX - AxI;
+                    double n = BulletY - AyI;
+                    double d = bx * cy - cx * by;
+                    double WA = (m * (by - cy) + n * (cx - bx) + bx * cy - cx * by) / d;
+                    double WB = (m * cy - n * cx) / d;
+                    double WC = (n * bx - m * by) / d;
+
+                    if (WA >= 0 && WA < 1 && WB < 1 && WB >= 0 && WC < 1 && WC >= 0)
+                    {
+                        bullethit = true;
+                        Console.WriteLine("Your Ship Sank");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Your Ship Survived! " + "Total Score: " + Area);
+                    }
+                    String Gui = "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒";
+                    Console.WriteLine("------------------------------------------------------------------------------");
+                    Console.WriteLine("  ╔══════════════════════════════╗");
+                    Console.WriteLine("12║" + Gui + "║");
+                    Console.WriteLine("11║" + Gui + "║");
+                    Console.WriteLine("10║" + Gui + "║");
+                    Console.WriteLine("09║" + Gui + "║" + "            Random Bullet");
+                    Console.WriteLine("08║" + Gui + "║" + "            Coordinates: (" + BulletX + " , " + BulletY + ")");
+                    Console.WriteLine("07║" + Gui + "║");
+                    Console.WriteLine("06║" + Gui + "║");
+                    Console.WriteLine("05║" + Gui + "║");
+                    Console.WriteLine("04║" + Gui + "║");
+                    Console.WriteLine("03║" + Gui + "║");
+                    Console.WriteLine("02║" + Gui + "║");
+                    Console.WriteLine("01║" + Gui + "║");
+                    Console.WriteLine("00╚══════════════════════════════╝");
+                    Console.WriteLine("  0123456789012345678901234567890");
+                    Console.WriteLine("------------------------------------------------------------------------------");
+                    Console.WriteLine("Press Enter for Mainmenu");
+                    Console.SetCursorPosition(2 + AxI, 15 - AyI);
+                    Console.Write("A");
+                    Console.SetCursorPosition(2 + BxI, 15 - ByI);
+                    Console.Write("B");
+                    Console.SetCursorPosition(2 + CxI, 15 - CyI);
+                    Console.Write("C");
+                    Console.SetCursorPosition(2 + BulletX, 15 - BulletY);
+                    Console.Write("x");
+                    Console.SetCursorPosition(0, 19);
+                    gotomainmenu = Console.ReadLine();
+                    menubiregidildi = false;
+                    entryI = 0;
+                    menuucegidildi = true;
+
+                }
+                if (entryI == 3 && menubiregidildi == false)
+                {
+                    Console.WriteLine("You Haven't Generated a Ship Yet");
+                    Console.WriteLine("------------------------------------------------------------------------------");
+                    Console.WriteLine("Press Enter for Mainmenu");
+                    gotomainmenu = Console.ReadLine();
+                }
+                /// Fourth Tab which shows the Scoreboard
+                if (entryI == 4)
+                {
+                    Console.WriteLine("HIGH SCORE TABLE");
+                    Console.WriteLine("------------------------------------------------------------------------------");
+                    if (Area > 60 && bullethit == false && menuucegidildi == true)
+                    {
+                        Console.WriteLine(Nickname);
+                        Console.SetCursorPosition(21, 2);
+                        Console.WriteLine(Area);
+                        Console.SetCursorPosition(0, 3);
+                    }
+                    Console.WriteLine("Nazan Kaya           " + nazan);
+                    if (Area > 30 && 60 >= Area && bullethit == false && menuucegidildi == true)
+                    {
+                        Console.WriteLine(Nickname);
+                        Console.SetCursorPosition(21, 3);
+                        Console.WriteLine(Area);
+                        Console.SetCursorPosition(0, 4);
+                    }
+                    Console.WriteLine("Ali Kurt             " + ali);
+                    if (Area > 10 && 30 >= Area && bullethit == false && menuucegidildi == true)
+                    {
+                        Console.WriteLine(Nickname);
+                        Console.SetCursorPosition(21, 4);
+                        Console.WriteLine(Area);
+                        Console.SetCursorPosition(0, 5);
+                    }
+                    if (10 >= Area | bullethit == true | menuucegidildi == false)
+                    {
+                        Console.WriteLine("Sibel Arslan         " + sibel);
+                    }
+                    Console.WriteLine("------------------------------------------------------------------------------");
+                    Console.WriteLine("Press Enter for Mainmenu");
+
+                    bullethit = false;
+                    gotomainmenu = Console.ReadLine();
+                    ///There is no fifth tab because its an exit tab. If you input 5 to console, the first while loop ends and program shuts down.
+                }
+            }
+        }
+    }
+}
